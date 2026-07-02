@@ -346,7 +346,6 @@
             background: var(--admin-card-bg);
             border: 1px solid var(--admin-border);
             border-radius: 16px;
-            overflow: hidden;
         }
 
         .admin-table-card .table-header {

@@ -30,7 +30,11 @@ class BannerController extends Controller
             'is_active'  => 'boolean',
         ]);
 
-        // TODO: handle image upload
+        if ($request->hasFile('image')) {
+            $path = $request->file('image')->store('banners', 'public');
+            $validated['image_url'] = '/storage/' . $path;
+        }
+
         Banner::create($validated);
 
         return redirect()->route('admin.banners.index')

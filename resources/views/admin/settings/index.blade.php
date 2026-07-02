@@ -43,7 +43,7 @@
     <div class="col-md-9">
         <div class="card bg-white  shadow-sm">
             <div class="card-body">
-                <form action="#" method="POST">
+                <form action="{{ route('admin.settings.update') }}" method="POST">
                     @csrf
                     @method('PUT')
                     
@@ -61,10 +61,11 @@
                                         <label for="setting_{{ $setting->key ?? '' }}" class="col-sm-3 col-form-label ">{{ $setting->label ?? ucfirst(str_replace('_', ' ', $setting->key ?? '')) }}</label>
                                         <div class="col-sm-9">
                                             <input type="text" 
-                                                   class="form-control bg-white  " 
+                                                   class="form-control bg-white" 
                                                    id="setting_{{ $setting->key ?? '' }}" 
-                                                   name="settings[{{ $setting->key ?? '' }}]" 
-                                                   value="{{ $setting->value ?? '' }}">
+                                                   name="{{ $setting->key ?? '' }}" 
+                                                   value="{{ $setting->value ?? '' }}"
+                                                   required>
                                         </div>
                                     </div>
                                 @endforeach

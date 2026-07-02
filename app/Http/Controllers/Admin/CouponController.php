@@ -23,13 +23,14 @@ class CouponController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'code'            => 'required|string|max:50|unique:coupons,code',
-            'discount_type'   => 'required|in:flat,percentage',
-            'discount_value'  => 'required|numeric|min:0',
-            'expires_at'      => 'nullable|date',
-            'max_uses'        => 'nullable|integer|min:1',
+            'code'       => 'required|string|max:50|unique:coupons,code',
+            'type'       => 'required|in:fixed,percentage',
+            'value'      => 'required|numeric|min:0',
+            'expires_at' => 'nullable|date',
+            'max_uses'   => 'nullable|integer|min:1',
         ]);
 
+        $validated['status'] = true;
         Coupon::create($validated);
 
         return redirect()->route('admin.coupons.index')
@@ -49,11 +50,11 @@ class CouponController extends Controller
     public function update(Request $request, Coupon $coupon)
     {
         $validated = $request->validate([
-            'code'            => 'required|string|max:50|unique:coupons,code,' . $coupon->id,
-            'discount_type'   => 'required|in:flat,percentage',
-            'discount_value'  => 'required|numeric|min:0',
-            'expires_at'      => 'nullable|date',
-            'max_uses'        => 'nullable|integer|min:1',
+            'code'       => 'required|string|max:50|unique:coupons,code,' . $coupon->id,
+            'type'       => 'required|in:fixed,percentage',
+            'value'      => 'required|numeric|min:0',
+            'expires_at' => 'nullable|date',
+            'max_uses'   => 'nullable|integer|min:1',
         ]);
 
         $coupon->update($validated);

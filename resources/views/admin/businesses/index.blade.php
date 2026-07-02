@@ -69,7 +69,7 @@
         </form>
     </div>
 
-    <div class="table-responsive">
+    <div class="table-responsive" style="overflow: visible;">
         <table class="table table-borderless mb-0">
             <thead>
                 <tr>
@@ -90,7 +90,7 @@
                                 {{ strtoupper(substr($business->name, 0, 1)) }}
                             </div>
                             <div>
-                                <div style="font-size:13px; font-weight:600; color:#fff;">{{ $business->name }}</div>
+                                <div style="font-size:13px; font-weight:600; color:var(--admin-text);">{{ $business->name }}</div>
                                 <div style="font-size:11px; color:var(--admin-text-muted);">{{ $business->email }}</div>
                             </div>
                         </div>

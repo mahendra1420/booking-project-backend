@@ -13,7 +13,9 @@
         <p class="mb-0" style="color: var(--admin-text-muted)">Manage discount coupons and promotions.</p>
     </div>
     <div>
-        <button class="btn btn-primary"><i class="fas fa-plus me-1"></i> Add Coupon</button>
+        <a href="{{ route('admin.coupons.create') }}" class="btn btn-primary">
+            <i class="fas fa-plus me-1"></i> Add Coupon
+        </a>
     </div>
 </div>
 
@@ -44,9 +46,15 @@
                     </span>
                 </td>
                 <td>
-                    <button class="btn btn-sm btn-info " title="View"><i class="fas fa-eye"></i></button>
-                    <button class="btn btn-sm btn-primary" title="Edit"><i class="fas fa-edit"></i></button>
-                    <button class="btn btn-sm btn-danger" title="Delete"><i class="fas fa-trash"></i></button>
+                    <div class="d-flex gap-1">
+                        <a href="{{ route('admin.coupons.show', $coupon) }}" class="btn btn-sm btn-info" style="color:#fff;" title="View"><i class="fas fa-eye"></i></a>
+                        <a href="{{ route('admin.coupons.edit', $coupon) }}" class="btn btn-sm btn-primary" title="Edit"><i class="fas fa-edit"></i></a>
+                        <form action="{{ route('admin.coupons.destroy', $coupon) }}" method="POST" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this coupon?');">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-sm btn-danger" title="Delete"><i class="fas fa-trash"></i></button>
+                        </form>
+                    </div>
                 </td>
             </tr>
             @empty

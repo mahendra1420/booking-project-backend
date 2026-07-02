@@ -13,7 +13,9 @@
         <p class="mb-0" style="color: var(--admin-text-muted)">Manage app and website promotional banners.</p>
     </div>
     <div>
-        <button class="btn btn-primary"><i class="fas fa-plus me-1"></i> Add Banner</button>
+        <a href="{{ route('admin.banners.create') }}" class="btn btn-primary">
+            <i class="fas fa-plus me-1"></i> Add Banner
+        </a>
     </div>
 </div>
 
@@ -48,9 +50,15 @@
                     </span>
                 </td>
                 <td>
-                    <button class="btn btn-sm btn-info " title="View"><i class="fas fa-eye"></i></button>
-                    <button class="btn btn-sm btn-primary" title="Edit"><i class="fas fa-edit"></i></button>
-                    <button class="btn btn-sm btn-danger" title="Delete"><i class="fas fa-trash"></i></button>
+                    <div class="d-flex gap-1">
+                        <a href="{{ route('admin.banners.show', $banner) }}" class="btn btn-sm btn-info" style="color:#fff;" title="View"><i class="fas fa-eye"></i></a>
+                        <a href="{{ route('admin.banners.edit', $banner) }}" class="btn btn-sm btn-primary" title="Edit"><i class="fas fa-edit"></i></a>
+                        <form action="{{ route('admin.banners.destroy', $banner) }}" method="POST" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this banner?');">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-sm btn-danger" title="Delete"><i class="fas fa-trash"></i></button>
+                        </form>
+                    </div>
                 </td>
             </tr>
             @empty
